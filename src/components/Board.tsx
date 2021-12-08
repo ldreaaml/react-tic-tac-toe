@@ -9,6 +9,15 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root:{
+        justifyContent:"center",
+        spacing:2,
+    },
+    title:{
+        textAlign:"center",
+        fontSize: 45,
+        color: "#8fa6b0",
+    },
     board:{
         display: "grid",
         gridTemplateColumns:"repeat(3, 1fr)",
@@ -22,32 +31,40 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: "#8fa6b0",
         borderRadius: 10,
     },
-    x:{
+    text:{
         fontSize: 65,
-        textAlignVertical: "center",textAlign: "center",
+        textAlignVertical: "center",
+        textAlign: "center",
         color:"white",
+    },
+    x:{
+        backgroundColor: "#f58349",
+    },
+    o:{
+        backgroundColor: "#8ac787",
     }
   }),
 );
-
 
 export const Board = ({gameState}: Props) => {
     const classes = useStyles();
         
     return (    
-        
-    <Grid container justifyContent="center" spacing={2}>
+    <>
+    <Typography className={classes.title}>Tic Tac Toe</Typography>
+    <Grid container className={classes.root}>
       <Grid item >
         <Grid container className ={classes.board}>
           {gameState.map((value) => (
             <Grid item >
-              <div className={classes.square} >
-                <div className={classes.x}>{""}</div>
+              <div className={`${classes.square} ${value==="x"? classes.x: value==="o"?classes.o:""}`} >
+                <div className={classes.text} >{value}</div>
               </div>
             </Grid>
           ))}
         </Grid>
       </Grid>      
     </Grid>
+    </>
     );
 }

@@ -5,9 +5,10 @@ import { Board } from './components/Board';
 
 
 function App() {
-  
-  const currentState:string[] = ["","","","","","","","",""];
 
+  const currentState:string[] = ["x","o","","","","","","",""];
+
+  
   return (
     <>
       <Board gameState={currentState} />
