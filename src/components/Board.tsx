@@ -3,7 +3,6 @@ import {
   Grid,
   createStyles,
   Theme,
-  Paper,
   Typography,
 } from "@material-ui/core";
 import React from "react";
@@ -35,16 +34,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Board = ({ gameState }: Props) => {
-  const classes = useStyles();
 
+  const classes = useStyles();
   return (
     <>
       <Typography className={classes.title}>Tic Tac Toe</Typography>
       <Grid container className={classes.root}>
         <Grid item>
           <Grid container className={classes.board}>
-            {gameState.map((value) => (
-              <Square value={value} />
+            {gameState.map((value,index) => (
+              <Square value={value} index={index} />
             ))}
           </Grid>
         </Grid>

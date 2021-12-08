@@ -3,6 +3,7 @@ import React from "react";
 
 interface Props {
   value: string;
+  index: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -12,8 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 100,
       backgroundColor: "#8fa6b0",
       borderRadius: 10,
-    },
-    text: {
       fontSize: 65,
       textAlignVertical: "center",
       textAlign: "center",
@@ -28,16 +27,24 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Square = ({ value }: Props) => {
+export const Square = ({ value,index }: Props) => {
+  
+  const handleOnClick = (event:any) =>{
+    console.log(event.target.id);
+  };
+
   const classes = useStyles();
+
   return (
     <Grid item>
-      <div
-        className={`${classes.square} ${
-          value === "x" ? classes.x : value === "o" ? classes.o : ""
-        }`}
+      <div 
+        id={`${index}`}
+        className={`
+        ${classes.square} 
+        ${value === "x" ? classes.x : value === "o" ? classes.o : ""}`}
+        onClick={handleOnClick}
       >
-        <div className={classes.text}>{value}</div>
+      {value}
       </div>
     </Grid>
   );
