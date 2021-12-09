@@ -15,11 +15,11 @@ function App() {
   const [gameStatus, setGameStatus] = useState<string>("playing");
 
   //fill empty square with x/o
-  const setValue = (index: number, player: string) => {
+  const setValue = (index: number) => {
     if (gameState[index] === "" && gameStatus === "playing") {
-      console.log(`Player ${player} on ${index}`);
+      // console.log(`Player ${currentPlayer} on ${index}`);
       const newGameState = [...gameState];
-      newGameState[index] = player;
+      newGameState[index] = currentPlayer;
       setGameState(newGameState);
       updateGameStatus(newGameState);
     }
@@ -68,11 +68,7 @@ function App() {
 
   return (
     <>
-      <Board
-        gameState={gameState}
-        currentPlayer={currentPlayer}
-        setValue={setValue}
-      />
+      <Board gameState={gameState} setValue={setValue} />
       <GameStatus gameStatus={gameStatus} currentPlayer={currentPlayer} />
       <ResetButton handleReset={resetGame} />
     </>

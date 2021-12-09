@@ -2,10 +2,9 @@ import { makeStyles, Theme, createStyles, Grid } from "@material-ui/core";
 import React from "react";
 
 interface Props {
-  value: string;
+  value: string; //current state of the square
   index: number;
-  currentPlayer: string;
-  setValue(index: number, player: string): void;
+  setValue(index: number): void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,10 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Square = ({ value, index, currentPlayer, setValue }: Props) => {
+export const Square = ({ value, index, setValue }: Props) => {
   const classes = useStyles();
   const handleOnClick = (event: any) => {
-    setValue(index, currentPlayer);
+    setValue(index);
   };
 
   return (

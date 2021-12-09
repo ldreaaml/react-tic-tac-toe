@@ -10,8 +10,7 @@ import { Square } from "./Square";
 
 interface Props {
   gameState: string[];
-  currentPlayer: string;
-  setValue(index: number, player: string): void;
+  setValue(index: number): void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Board = ({ gameState, currentPlayer, setValue }: Props) => {
+export const Board = ({ gameState, setValue }: Props) => {
   const classes = useStyles();
   return (
     <>
@@ -44,12 +43,7 @@ export const Board = ({ gameState, currentPlayer, setValue }: Props) => {
         <Grid item>
           <Grid container className={classes.board}>
             {gameState.map((value, index) => (
-              <Square
-                value={value}
-                index={index}
-                currentPlayer={currentPlayer}
-                setValue={setValue}
-              />
+              <Square value={value} index={index} setValue={setValue} />
             ))}
           </Grid>
         </Grid>
