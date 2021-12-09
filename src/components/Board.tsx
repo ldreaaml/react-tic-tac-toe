@@ -12,6 +12,7 @@ interface Props {
   gameState: string[];
   currentPlayer: string;
   setValue(index: number, player: string): void;
+  declareWinner(gameState: string[]): string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,11 +33,21 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       border: "5px solid #8fa6b0",
     },
+    player: {
+      fontSize: 45,
+      color: "#8fa6b0",
+    },
   })
 );
 
-export const Board = ({ gameState, currentPlayer, setValue }: Props) => {
+export const Board = ({
+  gameState,
+  currentPlayer,
+  setValue,
+  declareWinner,
+}: Props) => {
   const classes = useStyles();
+  const winner = declareWinner(gameState);
   return (
     <>
       <Typography className={classes.title}>Tic Tac Toe</Typography>
@@ -54,6 +65,15 @@ export const Board = ({ gameState, currentPlayer, setValue }: Props) => {
           </Grid>
         </Grid>
       </Grid>
+      {winner ? (
+        <Typography className={classes.player}>
+          Winner is {winner.toUpperCase()}!
+        </Typography>
+      ) : (
+        <Typography className={classes.player}>
+          {currentPlayer.toUpperCase()} Turn
+        </Typography>
+      )}
     </>
   );
 };
