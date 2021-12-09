@@ -4,6 +4,8 @@ import React from "react";
 interface Props {
   value: string;
   index: number;
+  currentPlayer: string;
+  changePlayer(): void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,9 +32,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Square = ({
   value,
   index,
+  currentPlayer,
+  changePlayer,
 }: Props) => {
   const handleOnClick = (event: any) => {
-    console.log(event.target.id);
+    console.log(`Player ${currentPlayer} on ${event.target.id}`);
+    changePlayer();
   };
 
   const classes = useStyles();

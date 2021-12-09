@@ -10,6 +10,8 @@ import { Square } from "./Square";
 
 interface Props {
   gameState: string[];
+  currentPlayer: string;
+  changePlayer(): void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Board = ({ gameState }: Props) => {
+export const Board = ({ gameState, currentPlayer, changePlayer }: Props) => {
   const classes = useStyles();
   return (
     <>
@@ -45,6 +47,8 @@ export const Board = ({ gameState }: Props) => {
               <Square
                 value={value}
                 index={index}
+                currentPlayer={currentPlayer}
+                changePlayer={changePlayer}
               />
             ))}
           </Grid>

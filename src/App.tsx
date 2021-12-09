@@ -8,13 +8,24 @@ function App() {
   const initialState: string[] = ["x", "o", "x", "x", "o", "", "", "", ""];
   const [gameState, setGameState] = useState<string[]>(initialState);
 
+  const firstPlayer = "x";
+  const [currentPlayer, setPlayerState] = useState<string>(firstPlayer);
+
+  const changePlayer = () => {
+    setPlayerState(currentPlayer === "x" ? "o" : "x");
+  };
+
   const resetGame = () => {
     setGameState(Array(9).fill(""));
   };
 
   return (
     <>
-      <Board gameState={gameState} />
+      <Board
+        gameState={gameState}
+        currentPlayer={currentPlayer}
+        changePlayer={changePlayer}
+      />
       <ResetButton handleReset={resetGame} />
     </>
   );
