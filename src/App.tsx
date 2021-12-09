@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import { Board } from "./components/Board";
+import { GameStatus } from "./components/GameStatus";
 import { ResetButton } from "./components/ResetButton";
 
 function App() {
@@ -10,28 +11,21 @@ function App() {
   const firstPlayer = "x";
   const [currentPlayer, setPlayerState] = useState<string>(firstPlayer);
 
-  const swapPlayer = () => {
-    setPlayerState(currentPlayer === "x" ? "o" : "x");
-  };
+  // status = ['win','tie','playing']
+  const [gameStatus, setGameStatus] = useState<string>("playing");
 
   //fill empty square with x/o
   const setValue = (index: number, player: string) => {
-    if (gameState[index] === "") {
-      const newGameState = [...gameState];
+    if (gameState[index] === "" && gameStatus === "playing") {
       console.log(`Player ${player} on ${index}`);
+      const newGameState = [...gameState];
       newGameState[index] = player;
       setGameState(newGameState);
-      swapPlayer();
+      updateGameStatus(newGameState);
     }
   };
 
-  //reset game to initial state
-  const resetGame = () => {
-    setGameState(Array(9).fill(""));
-  };
-
-  //check if we have a winner
-  const declareWinner = (gameState: string[]) => {
+  const updateGameStatus = (gameState: string[]) => {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -42,6 +36,7 @@ function App() {
       [0, 4, 8],
       [2, 4, 6],
     ];
+    //find winner
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (
@@ -49,10 +44,25 @@ function App() {
         gameState[a] === gameState[b] &&
         gameState[a] === gameState[c]
       ) {
-        return gameState[a];
+        setGameStatus("win");
       }
     }
-    return "";
+    //if winner not found, check for draw
+    if (gameState.indexOf("") === -1) {
+      setGameStatus("tie");
+    }
+    //no winner found and is not tie, keep playing
+    swapPlayer();
+  };
+
+  const swapPlayer = () => {
+    setPlayerState(currentPlayer === "x" ? "o" : "x");
+  };
+
+  //reset game to initial state
+  const resetGame = () => {
+    setGameState(Array(9).fill(""));
+    setGameStatus("playing");
   };
 
   return (
@@ -61,8 +71,8 @@ function App() {
         gameState={gameState}
         currentPlayer={currentPlayer}
         setValue={setValue}
-        declareWinner={declareWinner}
       />
+      <GameStatus gameStatus={gameStatus} currentPlayer={currentPlayer} />
       <ResetButton handleReset={resetGame} />
     </>
   );
