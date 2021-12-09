@@ -1,12 +1,10 @@
 import { makeStyles, Theme, createStyles, Grid } from "@material-ui/core";
 import React from "react";
-import { setConstantValue } from "typescript";
 
 interface Props {
   value: string;
   index: number;
   currentPlayer: string;
-  changePlayer(): void;
   setValue(index: number, player: string): void;
 }
 
@@ -31,20 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Square = ({
-  value,
-  index,
-  currentPlayer,
-  changePlayer,
-  setValue,
-}: Props) => {
-  const handleOnClick = (event: any) => {
-    // console.log(`Player ${currentPlayer} on ${event.target.id}`);
-    setValue(index, currentPlayer);
-    changePlayer();
-  };
-
+export const Square = ({ value, index, currentPlayer, setValue }: Props) => {
   const classes = useStyles();
+  const handleOnClick = (event: any) => {
+    setValue(index, currentPlayer);
+  };
 
   return (
     <Grid item>
