@@ -1,5 +1,5 @@
-import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
-import React from "react";
+import { makeStyles, Typography } from "@material-ui/core";
+import Confetti from "react-confetti";
 
 interface Props {
   gameStatus: string;
@@ -31,9 +31,12 @@ export const GameStatus = ({ gameStatus, currentPlayer }: Props) => {
         switch (gameStatus) {
           case "win":
             return (
-              <Typography className={classes.status}>
-                Winner is {currentPlayer.toUpperCase()}!
-              </Typography>
+              <>
+                <Typography className={classes.status}>
+                  Winner is {currentPlayer.toUpperCase()}!
+                </Typography>
+                <Confetti colors={[statusColor, "#c3d9e3"]} />
+              </>
             );
           case "tie":
             return (
