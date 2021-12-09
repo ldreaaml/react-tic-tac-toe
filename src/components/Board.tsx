@@ -42,7 +42,10 @@ export const Board = ({ gameState }: Props) => {
         <Grid item>
           <Grid container className={classes.board}>
             {gameState.map((value, index) => (
-              <Square value={value} index={index} />
+              <Square
+                value={value}
+                index={index}
+              />
             ))}
           </Grid>
         </Grid>

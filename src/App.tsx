@@ -5,12 +5,17 @@ import { Board } from "./components/Board";
 import { ResetButton } from "./components/ResetButton";
 
 function App() {
-  const currentState: string[] = ["x", "o", "", "", "", "", "", "", ""];
+  const initialState: string[] = ["x", "o", "x", "x", "o", "", "", "", ""];
+  const [gameState, setGameState] = useState<string[]>(initialState);
+
+  const resetGame = () => {
+    setGameState(Array(9).fill(""));
+  };
 
   return (
     <>
-      <Board gameState={currentState} />
-      <ResetButton />
+      <Board gameState={gameState} />
+      <ResetButton handleReset={resetGame} />
     </>
   );
 }

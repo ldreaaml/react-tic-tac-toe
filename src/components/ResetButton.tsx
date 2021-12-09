@@ -1,7 +1,9 @@
 import { Button, createStyles, makeStyles, Theme } from "@material-ui/core";
 import React from "react";
 
-interface Props {}
+interface Props {
+  handleReset(): void;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,13 +18,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const ResetButton = (props: Props) => {
+export const ResetButton = ({ handleReset }: Props) => {
   const classes = useStyles();
+
+  const handleOnClick = (_event: any) => {
+    handleReset();
+  };
+
   return (
     <Button
       aria-label="resetButton"
       variant="contained"
       className={classes.btn}
+      onClick={handleOnClick}
     >
       Reset Game
     </Button>

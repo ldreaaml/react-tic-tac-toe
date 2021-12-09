@@ -27,9 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Square = ({ value,index }: Props) => {
-  
-  const handleOnClick = (event:any) =>{
+export const Square = ({
+  value,
+  index,
+}: Props) => {
+  const handleOnClick = (event: any) => {
     console.log(event.target.id);
   };
 
@@ -37,14 +39,14 @@ export const Square = ({ value,index }: Props) => {
 
   return (
     <Grid item>
-      <div 
+      <div
         id={`${index}`}
         className={`
         ${classes.square} 
         ${value === "x" ? classes.x : value === "o" ? classes.o : ""}`}
         onClick={handleOnClick}
       >
-      {value}
+        {value}
       </div>
     </Grid>
   );
