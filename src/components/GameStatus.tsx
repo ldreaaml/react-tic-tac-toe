@@ -6,18 +6,23 @@ interface Props {
   currentPlayer: string;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    status: {
-      fontSize: 40,
-      color: "#8fa6b0",
-      marginTop: 10,
-    },
-  })
-);
+const useStyles = makeStyles((theme) => ({
+  status: ({ statusColor }: { statusColor: string }) => ({
+    color: statusColor,
+    fontSize: 40,
+    marginTop: 10,
+  }),
+}));
 
 export const GameStatus = ({ gameStatus, currentPlayer }: Props) => {
-  const classes = useStyles();
+  const statusColor =
+    gameStatus === "tie"
+      ? "#8fa6b0"
+      : currentPlayer === "x"
+      ? "#f58349"
+      : "#8ac787";
+
+  const classes = useStyles({ statusColor });
 
   //render text displaying player's turn or a winner
   return (

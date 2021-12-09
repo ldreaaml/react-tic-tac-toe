@@ -45,6 +45,7 @@ function App() {
         gameState[a] === gameState[c]
       ) {
         setGameStatus("win");
+        return;
       }
     }
     //if winner not found, check for draw
