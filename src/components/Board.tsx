@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Board = ({ gameState }: Props) => {
-
   const classes = useStyles();
   return (
     <>
@@ -42,7 +41,7 @@ export const Board = ({ gameState }: Props) => {
       <Grid container className={classes.root}>
         <Grid item>
           <Grid container className={classes.board}>
-            {gameState.map((value,index) => (
+            {gameState.map((value, index) => (
               <Square value={value} index={index} />
             ))}
           </Grid>
