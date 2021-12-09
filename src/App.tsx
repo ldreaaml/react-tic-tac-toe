@@ -5,7 +5,7 @@ import { Board } from "./components/Board";
 import { ResetButton } from "./components/ResetButton";
 
 function App() {
-  const initialState: string[] = ["x", "o", "x", "x", "o", "", "", "", ""];
+  const initialState: string[] = ["", "", "", "", "", "", "", "", ""];
   const [gameState, setGameState] = useState<string[]>(initialState);
 
   const firstPlayer = "x";
@@ -13,6 +13,15 @@ function App() {
 
   const changePlayer = () => {
     setPlayerState(currentPlayer === "x" ? "o" : "x");
+  };
+
+  const setValue = (index: number, player: string) => {
+    if (gameState[index] === "") {
+      const newGameState = [...gameState];
+      console.log(`Player ${player} on ${index}`);
+      newGameState[index] = player;
+      setGameState(newGameState);
+    }
   };
 
   const resetGame = () => {
@@ -25,6 +34,7 @@ function App() {
         gameState={gameState}
         currentPlayer={currentPlayer}
         changePlayer={changePlayer}
+        setValue={setValue}
       />
       <ResetButton handleReset={resetGame} />
     </>

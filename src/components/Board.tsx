@@ -12,6 +12,7 @@ interface Props {
   gameState: string[];
   currentPlayer: string;
   changePlayer(): void;
+  setValue(index: number, player: string): void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Board = ({ gameState, currentPlayer, changePlayer }: Props) => {
+export const Board = ({ gameState, currentPlayer, changePlayer, setValue }: Props) => {
   const classes = useStyles();
   return (
     <>
@@ -49,6 +50,7 @@ export const Board = ({ gameState, currentPlayer, changePlayer }: Props) => {
                 index={index}
                 currentPlayer={currentPlayer}
                 changePlayer={changePlayer}
+                setValue={setValue}
               />
             ))}
           </Grid>
