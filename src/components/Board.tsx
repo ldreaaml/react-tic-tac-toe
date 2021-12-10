@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { Square } from "./Square";
+import { MyTheme } from "./Customizable";
 
 interface Props {
   gameState: string[];
@@ -22,14 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       textAlign: "center",
       fontSize: 45,
-      color: "#8fa6b0",
+      color: `${MyTheme.default}`,
     },
     board: {
       display: "grid",
       gridTemplateColumns: "repeat(3, 1fr)",
       gridGap: 10,
       padding: theme.spacing(2),
-      border: "5px solid #8fa6b0",
+      border: `5px solid ${MyTheme.default}`,
     },
   })
 );

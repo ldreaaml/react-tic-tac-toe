@@ -4,22 +4,15 @@ import { Board } from "./components/Board";
 import { GameStatus } from "./components/GameStatus";
 import { ResetButton } from "./components/ResetButton";
 import StateChecker from "./components/StateChecker";
+import { Player } from "./components/Customizable";
 
-//todo add enum
 function App() {
-  const initialState: string[] = ["", "", "", "", "", "", "", "", ""];
-  const [gameState, setGameState] = useState<string[]>(initialState);
-
-  const firstPlayer = "x";
-  const [currentPlayer, setPlayerState] = useState<string>(firstPlayer);
-
-  // status = ['win','tie','playing']
+  const [gameState, setGameState] = useState<string[]>(Array(9).fill(""));
+  const [currentPlayer, setPlayerState] = useState<string>(Player.one);
   const [gameStatus, setGameStatus] = useState<string>("playing");
 
-  //fill empty square with x/o
   const setValue = (index: number) => {
     if (gameState[index] === "" && gameStatus === "playing") {
-      // console.log(`Player ${currentPlayer} on ${index}`);
       const newGameState = [...gameState];
       newGameState[index] = currentPlayer;
       setGameState(newGameState);
@@ -38,10 +31,9 @@ function App() {
   };
 
   const swapPlayer = () => {
-    setPlayerState(currentPlayer === "x" ? "o" : "x");
+    setPlayerState(currentPlayer === Player.one ? Player.two : Player.one);
   };
 
-  //reset game to initial state
   const resetGame = () => {
     setGameState(Array(9).fill(""));
     setGameStatus("playing");

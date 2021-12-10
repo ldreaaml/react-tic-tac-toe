@@ -1,5 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import Confetti from "react-confetti";
+import { MyTheme, Player } from "./Customizable";
 
 interface Props {
   gameStatus: string;
@@ -17,14 +18,13 @@ const useStyles = makeStyles((theme) => ({
 export const GameStatus = ({ gameStatus, currentPlayer }: Props) => {
   const statusColor =
     gameStatus === "tie"
-      ? "#8fa6b0"
-      : currentPlayer === "x"
-      ? "#f58349"
-      : "#8ac787";
+      ? `${MyTheme.default}`
+      : currentPlayer === Player.one
+      ? `${MyTheme.one}`
+      : `${MyTheme.two}`;
 
   const classes = useStyles({ statusColor });
 
-  //render text displaying player's turn or a winner
   return (
     <>
       {(() => {

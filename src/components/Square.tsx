@@ -1,5 +1,6 @@
 import { makeStyles, Theme, createStyles, Grid } from "@material-ui/core";
 import React from "react";
+import { Player, MyTheme } from "./Customizable";
 
 interface Props {
   value: string; //current state of the square
@@ -12,18 +13,18 @@ const useStyles = makeStyles((theme: Theme) =>
     square: {
       height: 100,
       width: 100,
-      backgroundColor: "#8fa6b0",
+      backgroundColor: `${MyTheme.default}`,
       borderRadius: 10,
       fontSize: 65,
       textAlignVertical: "center",
       textAlign: "center",
       color: "white",
     },
-    x: {
-      backgroundColor: "#f58349",
+    firstPlayer: {
+      backgroundColor: `${MyTheme.one}`,
     },
-    o: {
-      backgroundColor: "#8ac787",
+    secondPlayer: {
+      backgroundColor: `${MyTheme.two}`,
     },
   })
 );
@@ -40,7 +41,13 @@ export const Square = ({ value, index, setValue }: Props) => {
         id={`${index}`}
         className={`
         ${classes.square} 
-        ${value === "x" ? classes.x : value === "o" ? classes.o : ""}`}
+        ${
+          value === Player.one
+            ? classes.firstPlayer
+            : value === Player.two
+            ? classes.secondPlayer
+            : ""
+        }`}
         onClick={handleOnClick}
       >
         {value}

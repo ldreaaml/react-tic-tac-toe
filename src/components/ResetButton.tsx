@@ -1,5 +1,6 @@
 import { Button, createStyles, makeStyles, Theme } from "@material-ui/core";
 import React from "react";
+import { MyTheme } from "./Customizable";
 
 interface Props {
   handleReset(): void;
@@ -8,7 +9,7 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     btn: {
-      backgroundColor: "#8fa6b0",
+      backgroundColor: `${MyTheme.default}`,
       color: "#fff",
       fontSize: 20,
       textAlignVertical: "center",
